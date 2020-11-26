@@ -16,4 +16,6 @@ function MyApp({ Component, pageProps }) {
     )
 }
 
+//update biach
+
 export default MyApp
