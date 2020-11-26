@@ -1,10 +1,5 @@
-import LoginForm from '../components/LoginForm'
+import { Login as LoginContainer } from 'containers'
 
-const Login = () => {
-    return (
-        <>
-            <LoginForm />
-        </>)
+export default function Login() {
+    return <LoginContainer />
 }
-
-export default Login

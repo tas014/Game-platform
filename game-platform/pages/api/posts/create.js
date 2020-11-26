@@ -3,30 +3,29 @@ import { db } from "lib/firebase";
 
 export default async (req, res) => {
     const {
-        user_id,
-        title,
-        excerpt,
-        content,
+        imageURL,
+        name,
+        gameURL,
+        type,
     } = req.body;
 
     return await db
-        .collection("posts")
+        .collection("games")
         .doc()
         .set(
             {
-                user_id,
-                title,
-                excerpt,
-                content
+                name,
+                imageURL,
+                gameURL,
+                type
             }
         )
         .then(() => {
-            console.log("Firebase 4 - Post Creado");
-            res.status(200).json({ message: 'Post Creado', title })
+            console.log("Firebase 4 - Juego Creado");
+            res.status(200).json({ message: 'Juego Creado', name })
             res.end();
         })
         .catch((error) =>
-            console.log("Hubo un error creando el post", error)
+            console.log("Hubo un error creando el juego", error)
         );
-
 };

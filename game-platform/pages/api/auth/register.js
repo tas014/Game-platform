@@ -1,8 +1,7 @@
 // Importo base de datos de firabase
-import { db, auth } from "../../../lib/firebase";
-import cookie from "cookie";
+import { db, auth } from "lib/firebase";
+
 export default async (req, res) => {
-    console.log(db, auth)
     const {
         name,
         //  lastname,
@@ -17,7 +16,7 @@ export default async (req, res) => {
             console.log('Firebase 2 - Usuario creado en base de auth')
 
             // Mail de verificacion de correo
-            //auth.currentUser.sendEmailVerification();
+            auth.currentUser.sendEmailVerification();
 
             // Crear una nueva entrar en la coleccion usuarios con el mismo ID que el de la autenticacion
             return await db
@@ -29,9 +28,9 @@ export default async (req, res) => {
                         //  apellido: lastname,
                         //   username,
                         //   dni,
+                        avatar: "https://picsum.photos/200/300",
                         email: email,
-                        elo: 1000,
-                        avatar: "https://picsum.photos/200/300"
+                        elo: 1000
                     }
                 )
                 .then(() => {

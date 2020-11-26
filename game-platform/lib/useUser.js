@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, createContext } from "react";
 import { useRouter } from "next/router";
-import { auth, db } from "../lib/firebase";
+import { auth, db } from "./firebase";
 import {
     removeUserCookie,
     setUserCookie,
@@ -11,7 +11,6 @@ import { mapUserData } from "./mapUserData";
 //Context Provider
 const authContext = createContext({ user: {} });
 const { Provider } = authContext;
-console.log(authContext);
 
 export function AuthProvider(props) {
     const auth = useUser();
@@ -63,7 +62,7 @@ const useUser = () => {
         });
         const userFromCookie = getUserFromCookie();
         if (!userFromCookie) {
-            /* router.push("/login"); */
+            router.push("/login");
             return;
         }
         setUser(userFromCookie);
@@ -77,7 +76,7 @@ const useUser = () => {
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 console.log(response)
-                router.push("/dashboard");
+                router.push("/");
             })
             .catch((error) => console.log(error));
     };

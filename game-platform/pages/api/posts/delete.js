@@ -7,15 +7,15 @@ export default async (req, res) => {
     } = req.body;
 
     return await db
-        .collection("posts")
+        .collection("games")
         .doc(id)
         .delete()
         .then(() => {
-            console.log("Firebase 4 - Post Borrado");
-            res.status(200).json({ message: 'Post Borrado', id })
+            console.log("Firebase 4 - juego Borrado");
+            res.status(200).json({ message: 'juego Borrado', id })
             res.end();
         })
         .catch((error) =>
-            console.log("Hubo un error borrando el post", error)
+            console.log("Hubo un error borrando el juego", error)
         );
 };

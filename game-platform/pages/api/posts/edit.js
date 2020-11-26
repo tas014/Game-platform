@@ -3,27 +3,26 @@ import { db } from "lib/firebase";
 
 export default async (req, res) => {
     const {
-        id,
-        user_id,
-        title,
-        excerpt,
-        content,
+        imageURL,
+        name,
+        gameURL,
+        type,
     } = req.body;
 
     return await db
-        .collection("posts")
+        .collection("games")
         .doc(id)
         .set(
             {
-                user_id,
-                title,
-                excerpt,
-                content
+                name,
+                imageURL,
+                gameURL,
+                type
             }
         )
         .then(() => {
-            console.log("Firebase 4 - Post Edited");
-            res.status(200).json({ message: 'Post Creado', title })
+            console.log("Firebase 4 - Game Edited");
+            res.status(200).json({ message: 'Juego Creado', name })
             res.end();
         })
         .catch((error) =>

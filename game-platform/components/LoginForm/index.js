@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import { Container } from './styles'
+import { useAuth } from 'lib/useUser';
 
-const SignUpForm = () => {
+const LoginForm = () => {
     const [message, setMessage] = useState('');
+    const auth = useAuth();
+
     return (
         <Container>
             <Formik
@@ -17,18 +20,14 @@ const SignUpForm = () => {
                     if (!values.password) {
                         errors.password = 'Required';
                     }
-                    if (!values.name) {
-                        errors.name = 'Required';
-                    }
                     return errors;
                 }}
                 onSubmit={
                     async (values, { setSubmitting }) => {
                         try {
-                            const res = await axios.post('api/auth/register', values)
-                            const data = await res.data
+                            auth.login(values)
                             setSubmitting(false);
-                            setMessage(`${data.message} - ${data.name}`)
+                            //setMessage(`${data.message} - ${data.name}`)
                         } catch (error) {
                             if (error.response) {
                                 /*
@@ -64,12 +63,8 @@ const SignUpForm = () => {
                             <Field type="password" name="password" placeholder="Password" />
                             <ErrorMessage name="password" component="div" />
                         </div>
-                        <div className="input_row">
-                            <Field type="text" name="name" placeholder="Nombre" />
-                            <ErrorMessage name="name" component="div" />
-                        </div>
                         <button type="submit" disabled={isSubmitting}>
-                            Sign Up
+                            Login
                         </button>
                     </Form>
                 )}
@@ -79,4 +74,4 @@ const SignUpForm = () => {
     )
 }
 
-export default SignUpForm;
+export default LoginForm;

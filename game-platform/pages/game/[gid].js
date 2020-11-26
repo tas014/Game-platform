@@ -1,19 +1,18 @@
 import { useRouter } from 'next/router'
-import Games from '../../simulation/gamesdata.json'
-import { AuthProvider } from '../../lib/useUser'
 import { useState, useEffect } from "react";
 import { db } from "../../lib/firebase";
+import { AuthProvider } from 'lib/useUser';
 
 
 export default function Game(props) {
     console.log("PROPS", props);
     return (
-        <AuthProvider>
-            <section className='gameSection'>
-                <h1>{props.name}</h1>
-                {<iframe src={props.gameURL}></iframe>}
-            </section>
-        </AuthProvider>
+        //<AuthProvider>
+        <section className='gameSection'>
+            <h1>{props.name}</h1>
+            {<iframe src={props.gameURL}></iframe>}
+        </section>
+        //</AuthProvider>
     )
 }
 
